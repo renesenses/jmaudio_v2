@@ -54,6 +54,7 @@
     <nav class="admin-tabs" id="admin-tabs">
       <button class="tab active" data-tab="hero">Hero</button>
       <button class="tab" data-tab="presentation">Présentation</button>
+      <button class="tab" data-tab="systemes">Systèmes</button>
       <button class="tab" data-tab="marques">Marques</button>
       <button class="tab" data-tab="services">Services</button>
       <button class="tab" data-tab="news">Actualités</button>
@@ -83,6 +84,10 @@
           <label for="hero-cta">Texte du bouton</label>
           <input type="text" id="hero-cta-input" data-path="hero.ctaText">
         </div>
+        <div class="form-group">
+          <label for="hero-welcomebar">Bandeau d'accueil (sous le hero)</label>
+          <input type="text" id="hero-welcomebar-input" data-path="hero.welcomeBar">
+        </div>
       </div>
 
       <!-- Présentation -->
@@ -94,6 +99,21 @@
         </div>
         <div id="presentation-cards-list" class="repeatable-list"></div>
         <button class="btn btn-add" id="add-presentation-card">+ Ajouter une carte</button>
+      </div>
+
+      <!-- Systèmes -->
+      <div class="tab-panel" id="panel-systemes">
+        <h2>Section Systèmes en écoute</h2>
+        <div class="form-group">
+          <label>Titre de section</label>
+          <input type="text" id="systemes-title-input" data-path="systemes.sectionTitle">
+        </div>
+        <div class="form-group">
+          <label>Introduction</label>
+          <textarea id="systemes-intro-input" data-path="systemes.intro" rows="2"></textarea>
+        </div>
+        <div id="systemes-items-list" class="repeatable-list"></div>
+        <button class="btn btn-add" id="add-systemes-item">+ Ajouter un système</button>
       </div>
 
       <!-- Marques -->
@@ -151,6 +171,10 @@
         <div class="form-group">
           <label>Texte bouton CTA</label>
           <input type="text" id="occasions-cta-btn-input" data-path="occasions.ctaButtonText">
+        </div>
+        <div class="form-group">
+          <label>Note financement (optionnel)</label>
+          <input type="text" id="occasions-financing-input" data-path="occasions.financingNote">
         </div>
         <div id="occasions-categories-list" class="repeatable-list"></div>
         <button class="btn btn-add" id="add-occasions-category">+ Ajouter une catégorie</button>

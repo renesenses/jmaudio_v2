@@ -9,7 +9,10 @@
   var ICONS = {
     headphones: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>',
     location: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>',
-    person: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>'
+    person: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
+    home: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>',
+    tools: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>',
+    'credit-card': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>'
   };
 
   /* --- Render Functions --- */
@@ -19,6 +22,14 @@
     document.getElementById('hero-subtitle').textContent = h.subtitle;
     document.getElementById('hero-title').innerHTML = h.title + '<br><em>' + h.titleEmphasis + '</em>';
     document.getElementById('hero-cta').textContent = h.ctaText;
+
+    // Welcome bar
+    if (h.welcomeBar) {
+      var bar = document.getElementById('welcome-bar');
+      if (bar) {
+        bar.textContent = h.welcomeBar;
+      }
+    }
   }
 
   function renderPresentation(data) {
@@ -45,6 +56,32 @@
         '</div>';
     });
     grid.innerHTML = html;
+  }
+
+  function renderSystemes(data) {
+    if (!data.systemes) return;
+    var s = data.systemes;
+    document.getElementById('systemes-title').textContent = s.sectionTitle;
+    document.getElementById('systemes-intro').textContent = s.intro;
+
+    var html = '';
+    s.items.forEach(function (item) {
+      html += '<div class="systeme-card animate">';
+      if (item.imageUrl) {
+        html += '<div class="systeme-img"><img src="' + item.imageUrl + '" alt="' + item.name + '" loading="lazy"></div>';
+      }
+      html += '<div class="systeme-body">' +
+        '<h3 class="systeme-name">' + item.name + '</h3>' +
+        '<p class="systeme-desc">' + item.description + '</p>' +
+        '<ul class="systeme-components">';
+      item.components.forEach(function (comp) {
+        html += '<li>' + comp + '</li>';
+      });
+      html += '</ul>' +
+        '<p class="systeme-price">' + item.priceRange + '</p>' +
+        '</div></div>';
+    });
+    document.getElementById('systemes-grid').innerHTML = html;
   }
 
   function renderMarques(data) {
@@ -126,9 +163,12 @@
 
     document.getElementById('occasions-categories').innerHTML = html;
 
-    document.getElementById('occasions-cta').innerHTML =
-      '<p>' + o.ctaText + '</p>' +
-      '<a href="#contact" class="occasions-btn">' + o.ctaButtonText + '</a>';
+    var ctaHtml = '<p>' + o.ctaText + '</p>';
+    if (o.financingNote) {
+      ctaHtml += '<p class="occasions-financing">' + o.financingNote + '</p>';
+    }
+    ctaHtml += '<a href="#contact" class="occasions-btn">' + o.ctaButtonText + '</a>';
+    document.getElementById('occasions-cta').innerHTML = ctaHtml;
   }
 
   function formatDateFr(dateStr) {
@@ -163,21 +203,43 @@
     if (featured.imageUrl) {
       html += '<div class="news-featured-img"><img src="' + featured.imageUrl + '" alt="' + featured.title + '" loading="lazy"></div>';
     }
-    html += '<div class="news-featured-body' + (featured.imageUrl ? '' : ' news-featured-body-full') + '">' +
-      '<p class="news-date">' + formatDateFr(featured.date) + '</p>' +
+    html += '<div class="news-featured-body' + (featured.imageUrl ? '' : ' news-featured-body-full') + '">';
+    if (featured.isEvent) {
+      html += '<span class="news-event-badge">Événement</span>';
+    }
+    html += '<p class="news-date">' + formatDateFr(featured.date) + '</p>' +
       '<h3 class="news-title">' + featured.title + '</h3>' +
-      '<p class="news-excerpt">' + featured.content + '</p>' +
-      '</div></div>';
+      '<p class="news-excerpt">' + featured.content + '</p>';
+    if (featured.isEvent && featured.eventDetails) {
+      if (featured.eventDetails.time) {
+        html += '<p class="news-event-time">🕐 ' + featured.eventDetails.time + '</p>';
+      }
+      if (featured.eventDetails.location) {
+        html += '<p class="news-event-location">📍 ' + featured.eventDetails.location + '</p>';
+      }
+    }
+    html += '</div></div>';
 
     // Older news (up to 2)
     if (items.length > 1) {
       html += '<div class="news-older">';
       var limit = Math.min(items.length, 3);
       for (var i = 1; i < limit; i++) {
-        html += '<div class="news-older-card animate">' +
-          '<p class="news-date">' + formatDateFr(items[i].date) + '</p>' +
-          '<h3 class="news-title">' + items[i].title + '</h3>' +
-          '</div>';
+        html += '<div class="news-older-card animate">';
+        if (items[i].isEvent) {
+          html += '<span class="news-event-badge">Événement</span>';
+        }
+        html += '<p class="news-date">' + formatDateFr(items[i].date) + '</p>' +
+          '<h3 class="news-title">' + items[i].title + '</h3>';
+        if (items[i].isEvent && items[i].eventDetails) {
+          if (items[i].eventDetails.time) {
+            html += '<p class="news-event-time">🕐 ' + items[i].eventDetails.time + '</p>';
+          }
+          if (items[i].eventDetails.location) {
+            html += '<p class="news-event-location">📍 ' + items[i].eventDetails.location + '</p>';
+          }
+        }
+        html += '</div>';
       }
       html += '</div>';
     }
@@ -280,6 +342,21 @@
     window.addEventListener('scroll', updateNavbar, { passive: true });
     updateNavbar();
 
+    // FAB contact button
+    var fab = document.getElementById('fab-contact');
+    if (fab) {
+      var hero = document.getElementById('hero');
+      var heroHeight = hero ? hero.offsetHeight : 600;
+      function updateFab() {
+        fab.classList.toggle('visible', window.scrollY > heroHeight);
+      }
+      window.addEventListener('scroll', updateFab, { passive: true });
+      updateFab();
+      fab.addEventListener('click', function () {
+        openContactModal();
+      });
+    }
+
     // Mobile menu toggle
     var toggle = document.getElementById('menu-toggle');
     var navLinks = document.getElementById('nav-links');
@@ -331,6 +408,7 @@
     .then(function (data) {
       renderHero(data);
       renderPresentation(data);
+      renderSystemes(data);
       renderMarques(data);
       renderServices(data);
       renderNews(data);

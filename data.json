@@ -3,7 +3,8 @@
     "subtitle": "Hi-Fi & Home Cinéma haut de gamme — Dijon",
     "title": "Écoutez…",
     "titleEmphasis": "la musique est devant vous",
-    "ctaText": "Découvrir"
+    "ctaText": "Découvrir",
+    "welcomeBar": "Entrée libre du mardi au samedi après-midi ◆ Écoute sur rendez-vous le matin ◆ 03 80 77 04 91"
   },
   "presentation": {
     "sectionTitle": "Un lieu dédié à l'écoute",
@@ -23,6 +24,45 @@
         "number": "∞",
         "title": "Passion",
         "description": "Chaque écoute est une expérience unique. Nous prenons le temps de comprendre vos attentes pour vous guider vers le système qui vous ressemble."
+      }
+    ]
+  },
+  "systemes": {
+    "sectionTitle": "Systèmes en écoute",
+    "intro": "Trois configurations permanentes dans nos auditoriums, du système accessible au système de référence. Venez les écouter.",
+    "items": [
+      {
+        "name": "Système Essentiel",
+        "description": "Une entrée en matière audiophile remarquable. Musicalité, finesse et polyvalence pour un budget maîtrisé.",
+        "components": [
+          "Ampli intégré Cambridge Audio CXA81",
+          "Lecteur réseau Cambridge Audio CXN V2",
+          "Enceintes Monitor Audio Silver 300"
+        ],
+        "priceRange": "~3 500 €",
+        "imageUrl": ""
+      },
+      {
+        "name": "Système Référence",
+        "description": "L'équilibre parfait entre raffinement et puissance. Une musicalité envoûtante, un niveau de détail saisissant.",
+        "components": [
+          "Ampli intégré Luxman L-507Z",
+          "Lecteur réseau / DAC EverSolo DMP-A8",
+          "Enceintes Piega Classic 40.2"
+        ],
+        "priceRange": "~12 000 €",
+        "imageUrl": ""
+      },
+      {
+        "name": "Système Prestige",
+        "description": "L'état de l'art sans compromis. Pour l'audiophile exigeant qui recherche l'émotion absolue.",
+        "components": [
+          "Amplification Pass Labs INT-250",
+          "Source Métronome AQWO",
+          "Enceintes Wilson Benesch Precision P2.0"
+        ],
+        "priceRange": "Sur consultation",
+        "imageUrl": ""
       }
     ]
   },
@@ -195,6 +235,21 @@
         "icon": "person",
         "title": "Conseil sur mesure",
         "description": "De la première écoute au système de référence, nous vous accompagnons dans la construction de votre installation, étape par étape."
+      },
+      {
+        "icon": "home",
+        "title": "Diagnostic à domicile",
+        "description": "Nous nous déplaçons chez vous pour analyser votre pièce d'écoute, optimiser le placement de vos enceintes et vous conseiller sur les améliorations possibles."
+      },
+      {
+        "icon": "tools",
+        "title": "SAV & Reprise",
+        "description": "Service après-vente réactif sur toutes les marques que nous distribuons. Reprise possible de votre ancien matériel lors d'un upgrade."
+      },
+      {
+        "icon": "credit-card",
+        "title": "Facilités de paiement",
+        "description": "Paiement en plusieurs fois sans frais disponible pour vous permettre d'accéder au système de vos rêves en toute sérénité."
       }
     ]
   },
@@ -203,6 +258,7 @@
     "intro": "Des appareils d'exception, sélectionnés et vérifiés par nos soins. Stock mis à jour régulièrement.",
     "ctaText": "Ce stock évolue fréquemment. Contactez-nous pour connaître les disponibilités.",
     "ctaButtonText": "Nous contacter",
+    "financingNote": "Facilités de paiement disponibles — nous consulter pour les modalités.",
     "categories": [
       {
         "name": "Électronique",
@@ -402,7 +458,23 @@
         "date": "2026-02-15",
         "title": "Nouvelles marques en audition",
         "content": "Nous sommes heureux de vous accueillir pour découvrir nos nouvelles références en électronique et enceintes. Prenez rendez-vous pour une séance d'écoute personnalisée dans nos auditoriums.",
-        "imageUrl": ""
+        "imageUrl": "",
+        "isEvent": false,
+        "eventDetails": {
+          "time": "",
+          "location": ""
+        }
+      },
+      {
+        "date": "2026-03-15",
+        "title": "Journée portes ouvertes — Printemps du son",
+        "content": "Découvrez nos trois systèmes en écoute permanente et profitez de conditions exceptionnelles sur une sélection d'appareils. Démonstrations toute la journée, conseils personnalisés.",
+        "imageUrl": "",
+        "isEvent": true,
+        "eventDetails": {
+          "time": "10h – 19h",
+          "location": "JM Audio — 2 rue Legouz Gerland, Dijon"
+        }
       }
     ]
   }

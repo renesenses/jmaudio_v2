@@ -17,7 +17,10 @@
   var ICON_OPTIONS = [
     { value: 'headphones', label: 'Casque (headphones)' },
     { value: 'location', label: 'Localisation (location)' },
-    { value: 'person', label: 'Personne (person)' }
+    { value: 'person', label: 'Personne (person)' },
+    { value: 'home', label: 'Maison (home)' },
+    { value: 'tools', label: 'Clé / Outils (tools)' },
+    { value: 'credit-card', label: 'Carte bancaire (credit-card)' }
   ];
 
   /* =========================================
@@ -214,6 +217,9 @@
     renderPresentationCards(data.presentation.cards);
     renderMarquesCategories(data.marques.categories);
     renderServicesCards(data.services.cards);
+    if (data.systemes && data.systemes.items) {
+      renderSystemesItems(data.systemes.items);
+    }
     if (data.news && data.news.items) {
       renderNewsItems(data.news.items);
     }
@@ -250,6 +256,8 @@
     currentData.presentation.cards = collectPresentationCards();
     currentData.marques.categories = collectMarquesCategories();
     currentData.services.cards = collectServicesCards();
+    if (!currentData.systemes) currentData.systemes = { sectionTitle: 'Systèmes en écoute', intro: '', items: [] };
+    currentData.systemes.items = collectSystemesItems();
     if (!currentData.news) currentData.news = { sectionTitle: 'Actualités', items: [] };
     currentData.news.items = collectNewsItems();
     currentData.occasions.categories = collectOccasionsCategories();
@@ -413,6 +421,56 @@
       });
     });
     return cards;
+  }
+
+  /* =========================================
+     Systèmes Items
+     ========================================= */
+
+  function renderSystemesItems(items) {
+    var list = document.getElementById('systemes-items-list');
+    list.innerHTML = '';
+    items.forEach(function (item, i) {
+      list.appendChild(createSystemeBlock(item, i));
+    });
+  }
+
+  function createSystemeBlock(item, index) {
+    var block = document.createElement('div');
+    block.className = 'repeatable-block';
+
+    var compsText = (item.components || []).join('\n');
+
+    block.innerHTML =
+      '<div class="block-header"><h3>' + escHtml(item.name || 'Système ' + (index + 1)) + '</h3><button class="btn btn-danger btn-remove-systeme">Supprimer</button></div>' +
+      '<div class="form-group"><label>Nom</label><input type="text" class="systeme-name" value="' + escAttr(item.name) + '"></div>' +
+      '<div class="form-group"><label>Description</label><textarea class="systeme-desc" rows="2">' + escHtml(item.description) + '</textarea></div>' +
+      '<div class="form-group"><label>Composants (un par ligne)</label><textarea class="systeme-components" rows="4">' + escHtml(compsText) + '</textarea></div>' +
+      '<div class="form-row">' +
+        '<div class="form-group"><label>Gamme de prix</label><input type="text" class="systeme-price" value="' + escAttr(item.priceRange) + '"></div>' +
+        '<div class="form-group"><label>URL image (optionnel)</label><input type="text" class="systeme-image" value="' + escAttr(item.imageUrl) + '"></div>' +
+      '</div>';
+
+    block.querySelector('.btn-remove-systeme').addEventListener('click', function () {
+      block.remove();
+    });
+    return block;
+  }
+
+  function collectSystemesItems() {
+    var items = [];
+    document.querySelectorAll('#systemes-items-list .repeatable-block').forEach(function (block) {
+      var compsRaw = block.querySelector('.systeme-components').value;
+      var components = compsRaw.split('\n').map(function (s) { return s.trim(); }).filter(function (s) { return s.length > 0; });
+      items.push({
+        name: block.querySelector('.systeme-name').value,
+        description: block.querySelector('.systeme-desc').value,
+        components: components,
+        priceRange: block.querySelector('.systeme-price').value,
+        imageUrl: block.querySelector('.systeme-image').value
+      });
+    });
+    return items;
   }
 
   /* =========================================
@@ -660,6 +718,11 @@
   function createNewsBlock(item, index) {
     var block = document.createElement('div');
     block.className = 'repeatable-block';
+
+    var isEvent = item.isEvent || false;
+    var eventDetails = item.eventDetails || { time: '', location: '' };
+    var eventId = 'news-event-' + index + '-' + Date.now();
+
     block.innerHTML =
       '<div class="block-header"><h3>' + escHtml(item.title || 'Actualité ' + (index + 1)) + '</h3><button class="btn btn-danger btn-remove-news">Supprimer</button></div>' +
       '<div class="form-row">' +
@@ -667,23 +730,45 @@
         '<div class="form-group"><label>Titre</label><input type="text" class="news-item-title" value="' + escAttr(item.title) + '"></div>' +
       '</div>' +
       '<div class="form-group"><label>Contenu</label><textarea class="news-content" rows="3">' + escHtml(item.content) + '</textarea></div>' +
-      '<div class="form-group"><label>URL image (optionnel)</label><input type="text" class="news-image" value="' + escAttr(item.imageUrl) + '"></div>';
+      '<div class="form-group"><label>URL image (optionnel)</label><input type="text" class="news-image" value="' + escAttr(item.imageUrl) + '"></div>' +
+      '<div class="form-check"><input type="checkbox" class="news-is-event" id="' + eventId + '"' + (isEvent ? ' checked' : '') + '><label for="' + eventId + '">Cet article est un événement</label></div>' +
+      '<div class="news-event-fields"' + (isEvent ? '' : ' style="display:none;"') + '>' +
+        '<div class="form-row">' +
+          '<div class="form-group"><label>Horaire</label><input type="text" class="news-event-time" value="' + escAttr(eventDetails.time) + '" placeholder="ex: 10h – 19h"></div>' +
+          '<div class="form-group"><label>Lieu</label><input type="text" class="news-event-location" value="' + escAttr(eventDetails.location) + '" placeholder="ex: JM Audio, Dijon"></div>' +
+        '</div>' +
+      '</div>';
 
     block.querySelector('.btn-remove-news').addEventListener('click', function () {
       block.remove();
     });
+
+    // Toggle event fields visibility
+    var checkbox = block.querySelector('.news-is-event');
+    var eventFields = block.querySelector('.news-event-fields');
+    checkbox.addEventListener('change', function () {
+      eventFields.style.display = checkbox.checked ? '' : 'none';
+    });
+
     return block;
   }
 
   function collectNewsItems() {
     var items = [];
     document.querySelectorAll('#news-items-list .repeatable-block').forEach(function (block) {
-      items.push({
+      var isEvent = block.querySelector('.news-is-event').checked;
+      var item = {
         date: block.querySelector('.news-date').value,
         title: block.querySelector('.news-item-title').value,
         content: block.querySelector('.news-content').value,
-        imageUrl: block.querySelector('.news-image').value
-      });
+        imageUrl: block.querySelector('.news-image').value,
+        isEvent: isEvent,
+        eventDetails: {
+          time: block.querySelector('.news-event-time').value,
+          location: block.querySelector('.news-event-location').value
+        }
+      };
+      items.push(item);
     });
     return items;
   }
@@ -711,11 +796,17 @@
       list.appendChild(createServicesCardBlock({ icon: 'headphones', title: '', description: '' }, count));
     });
 
+    document.getElementById('add-systemes-item').addEventListener('click', function () {
+      var list = document.getElementById('systemes-items-list');
+      var count = list.children.length;
+      list.appendChild(createSystemeBlock({ name: '', description: '', components: [], priceRange: '', imageUrl: '' }, count));
+    });
+
     document.getElementById('add-news-item').addEventListener('click', function () {
       var list = document.getElementById('news-items-list');
       var count = list.children.length;
       var today = new Date().toISOString().split('T')[0];
-      list.appendChild(createNewsBlock({ date: today, title: '', content: '', imageUrl: '' }, count));
+      list.appendChild(createNewsBlock({ date: today, title: '', content: '', imageUrl: '', isEvent: false, eventDetails: { time: '', location: '' } }, count));
     });
 
     document.getElementById('add-occasions-category').addEventListener('click', function () {
