@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" fill="none">
+  <rect width="800" height="450" fill="#111111"/>
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#c9a96e" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#111111" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#glow)"/>
+
+  <!-- Luxman Amplifier (wider, more detailed) -->
+  <rect x="80" y="200" width="240" height="110" rx="3" stroke="#c9a96e" stroke-width="1.5" fill="#1a1a1a"/>
+  <!-- VU meters -->
+  <rect x="110" y="215" width="80" height="40" rx="2" fill="#0a0a0a" stroke="#c9a96e" stroke-opacity="0.4" stroke-width="0.75"/>
+  <rect x="210" y="215" width="80" height="40" rx="2" fill="#0a0a0a" stroke="#c9a96e" stroke-opacity="0.4" stroke-width="0.75"/>
+  <!-- VU needle L -->
+  <line x1="150" y1="248" x2="165" y2="222" stroke="#c9a96e" stroke-width="0.75" stroke-opacity="0.7"/>
+  <path d="M 115 245 Q 150 218 185 245" stroke="#c9a96e" stroke-width="0.5" fill="none" stroke-opacity="0.3"/>
+  <!-- VU needle R -->
+  <line x1="250" y1="248" x2="262" y2="224" stroke="#c9a96e" stroke-width="0.75" stroke-opacity="0.7"/>
+  <path d="M 215 245 Q 250 218 285 245" stroke="#c9a96e" stroke-width="0.5" fill="none" stroke-opacity="0.3"/>
+  <!-- Knobs -->
+  <circle cx="120" cy="285" r="8" stroke="#c9a96e" stroke-width="1" fill="#0a0a0a"/>
+  <line x1="120" y1="277" x2="120" y2="282" stroke="#c9a96e" stroke-width="0.75"/>
+  <circle cx="160" cy="285" r="8" stroke="#c9a96e" stroke-width="1" fill="#0a0a0a"/>
+  <line x1="155" y1="278" x2="158" y2="282" stroke="#c9a96e" stroke-width="0.75"/>
+  <circle cx="240" cy="285" r="8" stroke="#c9a96e" stroke-width="1" fill="#0a0a0a"/>
+  <line x1="240" y1="277" x2="240" y2="282" stroke="#c9a96e" stroke-width="0.75"/>
+  <circle cx="280" cy="285" r="8" stroke="#c9a96e" stroke-width="1" fill="#0a0a0a"/>
+  <line x1="275" y1="278" x2="278" y2="282" stroke="#c9a96e" stroke-width="0.75"/>
+  <rect x="192" y="270" width="16" height="25" rx="2" stroke="#c9a96e" stroke-width="0.75" fill="none" stroke-opacity="0.5"/>
+  <text x="200" y="287" font-family="Georgia, serif" font-size="7" fill="#c9a96e" fill-opacity="0.5" text-anchor="middle">VOL</text>
+
+  <!-- EverSolo DAC/Streamer -->
+  <rect x="300" y="145" width="180" height="75" rx="3" stroke="#c9a96e" stroke-width="1.5" fill="#1a1a1a"/>
+  <rect x="315" y="158" width="100" height="45" rx="3" fill="#0a0a0a" stroke="#c9a96e" stroke-opacity="0.3" stroke-width="0.75"/>
+  <!-- Screen content -->
+  <rect x="322" y="165" width="86" height="4" rx="1" fill="#c9a96e" fill-opacity="0.15"/>
+  <rect x="322" y="173" width="60" height="3" rx="1" fill="#c9a96e" fill-opacity="0.1"/>
+  <rect x="322" y="180" width="86" height="12" rx="1" fill="#c9a96e" fill-opacity="0.05"/>
+  <rect x="325" y="183" width="30" height="6" rx="1" fill="#c9a96e" fill-opacity="0.2"/>
+  <rect x="358" y="183" width="30" height="6" rx="1" fill="#c9a96e" fill-opacity="0.1"/>
+  <circle cx="440" cy="175" r="12" stroke="#c9a96e" stroke-width="0.75" fill="#0a0a0a"/>
+  <circle cx="440" cy="175" r="2" fill="#c9a96e" fill-opacity="0.4"/>
+  <circle cx="465" cy="175" r="3" fill="#c9a96e" fill-opacity="0.4"/>
+
+  <!-- Piega Speakers (tall, elegant columns) -->
+  <rect x="510" y="110" width="70" height="250" rx="4" stroke="#c9a96e" stroke-width="1.5" fill="#1a1a1a"/>
+  <!-- Ribbon tweeter -->
+  <rect x="535" y="130" width="10" height="35" rx="2" fill="#0a0a0a" stroke="#c9a96e" stroke-opacity="0.5" stroke-width="0.75"/>
+  <line x1="540" y1="133" x2="540" y2="162" stroke="#c9a96e" stroke-width="0.3" stroke-opacity="0.4"/>
+  <!-- Mid driver -->
+  <circle cx="545" cy="200" r="20" stroke="#c9a96e" stroke-width="1" fill="#0a0a0a"/>
+  <circle cx="545" cy="200" r="9" stroke="#c9a96e" stroke-width="0.5" fill="#1a1a1a" stroke-opacity="0.5"/>
+  <!-- Bass driver -->
+  <circle cx="545" cy="280" r="28" stroke="#c9a96e" stroke-width="1" fill="#0a0a0a"/>
+  <circle cx="545" cy="280" r="15" stroke="#c9a96e" stroke-width="0.5" fill="#1a1a1a" stroke-opacity="0.5"/>
+  <circle cx="545" cy="280" r="4" fill="#c9a96e" fill-opacity="0.15"/>
+  <!-- Port -->
+  <rect x="530" y="325" width="30" height="8" rx="4" fill="#0a0a0a" stroke="#c9a96e" stroke-opacity="0.3" stroke-width="0.5"/>
+
+  <!-- Speaker R -->
+  <rect x="640" y="110" width="70" height="250" rx="4" stroke="#c9a96e" stroke-width="1.5" fill="#1a1a1a"/>
+  <rect x="665" y="130" width="10" height="35" rx="2" fill="#0a0a0a" stroke="#c9a96e" stroke-opacity="0.5" stroke-width="0.75"/>
+  <line x1="670" y1="133" x2="670" y2="162" stroke="#c9a96e" stroke-width="0.3" stroke-opacity="0.4"/>
+  <circle cx="675" cy="200" r="20" stroke="#c9a96e" stroke-width="1" fill="#0a0a0a"/>
+  <circle cx="675" cy="200" r="9" stroke="#c9a96e" stroke-width="0.5" fill="#1a1a1a" stroke-opacity="0.5"/>
+  <circle cx="675" cy="280" r="28" stroke="#c9a96e" stroke-width="1" fill="#0a0a0a"/>
+  <circle cx="675" cy="280" r="15" stroke="#c9a96e" stroke-width="0.5" fill="#1a1a1a" stroke-opacity="0.5"/>
+  <circle cx="675" cy="280" r="4" fill="#c9a96e" fill-opacity="0.15"/>
+  <rect x="660" y="325" width="30" height="8" rx="4" fill="#0a0a0a" stroke="#c9a96e" stroke-opacity="0.3" stroke-width="0.5"/>
+
+  <!-- Connection lines -->
+  <line x1="390" y1="220" x2="390" y2="240" stroke="#c9a96e" stroke-width="0.5" stroke-opacity="0.2" stroke-dasharray="4 3"/>
+  <line x1="200" y1="200" x2="200" y2="240" stroke="#c9a96e" stroke-width="0.5" stroke-opacity="0.2" stroke-dasharray="4 3"/>
+  <line x1="200" y1="240" x2="390" y2="240" stroke="#c9a96e" stroke-width="0.5" stroke-opacity="0.2" stroke-dasharray="4 3"/>
+  <line x1="320" y1="260" x2="320" y2="255" stroke="#c9a96e" stroke-width="0.5" stroke-opacity="0.2" stroke-dasharray="4 3"/>
+  <line x1="320" y1="255" x2="510" y2="255" stroke="#c9a96e" stroke-width="0.5" stroke-opacity="0.2" stroke-dasharray="4 3"/>
+
+  <!-- Label -->
+  <text x="400" y="405" font-family="Georgia, serif" font-size="14" fill="#c9a96e" fill-opacity="0.4" text-anchor="middle" letter-spacing="0.2em">RÉFÉRENCE</text>
+</svg>
