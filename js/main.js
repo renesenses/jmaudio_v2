@@ -97,7 +97,7 @@
     function prev() { goTo(current - 1); }
 
     function startAutoplay() {
-      autoplayInterval = setInterval(next, 5000);
+      autoplayInterval = setInterval(next, 7000);
     }
 
     function stopAutoplay() {
